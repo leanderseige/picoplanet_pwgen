@@ -7,8 +7,6 @@ import board
 import touchio
 from digitalio import DigitalInOut, Direction, Pull
 import usb_hid
-from adafruit_hid.consumer_control import ConsumerControl
-from adafruit_hid.consumer_control_code import ConsumerControlCode
 from adafruit_hid.keyboard import Keyboard
 from adafruit_hid.keycode import Keycode
 from adafruit_hid.keyboard_layout_us import KeyboardLayoutUS
@@ -39,7 +37,7 @@ while True:
     if touch1.raw_value > 2500 or touch2.raw_value > 2500 or touch3.raw_value > 2500:
         for x in range(10):
             rv = (touch1.raw_value&0x3) | ((touch2.raw_value&0x3)<<2) | ((touch3.raw_value&0x3)<<4)
-            print("%d\n" % rv)
+            # print("%d\n" % rv)
             layout.write(chars[rv])
             ledR.value = rv&0x01
             ledG.value = rv&0x04
@@ -49,7 +47,7 @@ while True:
             ledG.value = True
             ledB.value = True
             time.sleep(0.05)
-        #layout.write('\n')
+        layout.write('\n')
     else:
         ledR.value = True
         ledG.value = True
